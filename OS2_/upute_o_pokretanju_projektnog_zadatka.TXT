@@ -1,0 +1,33 @@
+1.Otvoriti mapu OS2_projekt
+2.Otvoriti file OS2_projekt.sln u visual studiu 2022 ili nekom drugom prikladnom okruženju
+3.Kada se aplikacija otvori u visual studiu, kliknuti start
+4.Početna windows forma daje mogucnost odabira izmedu asimetricnog i simetricnog algoritma (nebitno je kojim redoslijedom se pokrecu, u svrhu primjera mozete prvo otvoriti simetricne algoritme)
+
+//Koraci kada se klikne na 'Symmetric algorithms'
+1.Klikom na symmetric algorithms se otvara nova windows forma u kojoj se moze kriptirati/dekriptirati/hashirati sadrzaj
+2.Klikom na gumb 'Upload .txt file' otvorit ce se file explorer u kojem odabirete plain_text.txt datoteku, te ce se nakon toga tekst datoteke ucitati ispod gumba Encrypt
+3.Klikom na gumb 'Generate secret key' se generira tajni kljuc od 16 nasumicnih znakova koji ce se koristiti za kriptiranje/dekriptiranje
+4.Klikom na gumb 'Choose password for encryption' se ponovo otvara file explorer u kojem ovaj put odabirete datoteku tajni_kljuc.txt, nakon cega ce se sifra prikazati u windows formi ispod gumba
+5.Nakon toga kliknete na gumb 'Encrypt' koji ce sada kriptirati poruku te je prikazati u donjem većem textboxu iznat gumba 'Izracunaj hash'
+6.Nakon toga kliknite na gumb 'Calculate hash' koji ce izracunati Hash vrijednost pocetnog stringa (plain_texta)
+7.Nakon toga kliknite na gumb 'Upload file to decrypt' nakon kojeg ce se otvoriti file explorer te sada birate file 'Simetricni_kriptirani_tekst.txt'
+8.Klikom na desni gumb 'Choose password for decryption' ponovo odabirete isti tajni kljuc 'tajni_kljuc.txt'
+9.Nakon toga klikom na gumb 'Decrypt' ce se kriptirani tekst dekriptirat te ce se u većem textboxu ispod prikazati originalni string (plain_text)
+
+//Koraci kada se klikne na 'Asymmetric algorithms'
+1.Klikom na asymmetric algorithms se otvara nova windows forma u kojoj se moze kriptirati/dekriptirati/hashirati sadrzaj te digitalno potpisati sadrzaj i provjeriti tocnost digitalnog potpisa
+2.Klikom na gumb 'Upload .txt file' otvorit ce se file explorer u kojem odabirete plain_text.txt datoteku, te ce se nakon toga tekst datoteke ucitati ispod gumba Encrypt
+3.Klikom na gumb generate keys ce se generirati par kljuceva (public/private), javni kljuc - lijevo i privatni kljuc - desno ispod gumba
+4.Klikom na gumb 'Encrypt' ce se sadrzaj kriptirati koristeci generirani javni kljuc te ce se rezultat prikazati u vecem textboxu ispod
+5.Klikom na gumb 'Calculate hash' ce te dobiti hash vrijednost pocetnog stringa (plain_texta)
+6.Klikom na gumb 'Upload file to decrypt' ce se otvoriti file explorer iz kojeg ce te odabrati 'Asimetricni_kriptirani_tekst' koji ce se ucitati ispod gumba 'Decrypt'
+7.Nakon toga klikom na gumb 'Decrypt' ce se kriptirani sadrzaj dekriptirati te ce se u textboxu ispod prikazati originalni string (plain_text)
+
+//Zadnji korak je digitalno potpisivanje sadrzaja
+8.Nadalje klikom na gumb 'Choose private key' ponovo ce se otvoriti file explorer iz kojeg ce te odabrati datoteku 'privatekey.pem' (privatekey CMS(S/MIME)) u kojoj se sadrzi privatni kljuc koji je generiran uz pomoc 'OpenSSL-a' te koji se ce koristiti za digitalno potpisivanje sadrzaja
+9.Klikom na gumb 'Upload .txt file' na desnoj strani otvara se file explorer iz kojeg ponovo birate datoteku plain_text te ciji ce se sadrzaj ucitati ispod tog gumba
+10.Nakon toga klikom na gumb 'Sign message' ce te digitalno potpisati originalni string uz pomoc generiranog privatnog kljuca te ce se digitalni potpis tog stringa pokazati ispod labela 'Digital signature'
+11.Kako bi provjerili valjanost digitalnog potpisa, kliknite na gumb 'Choose public key' te u file exploreru odaberite datoteku 'publickey.pem' (publickey CSM(S/MIME)) s kojom ce te provjeriti valjanost digitalnog potpisa
+12.Klikom na gumb 'Upload input string' ce te iz file explorera opet odabrati datoteku plain_text u kojoj se nalazi originalni string te koji ce se prikazati ispod gumba
+13.Klikom na gumb 'Upload digital signature' iz file explorera odaberite datoteku 'digitalni_potpis.txt' nakon cega ce se digitalni potpis ucitati ispod labela 'Checking digital signature'
+14.Klikom na gumb 'Check signature' ce se provjeriti valjanost digitalnog potpisa te ako je taj digitalni potpis koristen za potpisivanje originalnog stringa, aplikacija ce izbaciti MessageBox 'The signature matches', no ako je digitalni potpis ili originalni input string promijenjen, nakon klika na gumb 'Check signature' ce u MessageBoxu pisati da je doslo do greske ili da se digitalni potpis ne poklapa

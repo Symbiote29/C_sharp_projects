@@ -1,0 +1,16 @@
+D:\OS2_moje\OS2_projekt\OS2_projekt\obj\Debug\OS2_projekt.csproj.AssemblyReference.cache
+D:\OS2_moje\OS2_projekt\OS2_projekt\obj\Debug\OS2_projekt.csproj.SuggestedBindingRedirects.cache
+D:\OS2_moje\OS2_projekt\OS2_projekt\obj\Debug\OS2_projekt.Form1.resources
+D:\OS2_moje\OS2_projekt\OS2_projekt\obj\Debug\OS2_projekt.Properties.Resources.resources
+D:\OS2_moje\OS2_projekt\OS2_projekt\obj\Debug\OS2_projekt.csproj.GenerateResource.cache
+D:\OS2_moje\OS2_projekt\OS2_projekt\obj\Debug\OS2_projekt.csproj.CoreCompileInputs.cache
+D:\OS2_moje\OS2_projekt\OS2_projekt\bin\Debug\OS2_projekt.exe.config
+D:\OS2_moje\OS2_projekt\OS2_projekt\bin\Debug\OS2_projekt.exe
+D:\OS2_moje\OS2_projekt\OS2_projekt\bin\Debug\OS2_projekt.pdb
+D:\OS2_moje\OS2_projekt\OS2_projekt\obj\Debug\OS2_projekt.exe
+D:\OS2_moje\OS2_projekt\OS2_projekt\obj\Debug\OS2_projekt.pdb
+D:\OS2_moje\OS2_projekt\OS2_projekt\obj\Debug\OS2_projekt.Form2.resources
+D:\OS2_moje\OS2_projekt\OS2_projekt\obj\Debug\OS2_projekt.Form3.resources
+D:\OS2_moje\OS2_projekt\OS2_projekt\bin\Debug\BouncyCastle.Crypto.dll
+D:\OS2_moje\OS2_projekt\OS2_projekt\obj\Debug\OS2_projekt.csproj.CopyComplete
+D:\OS2_moje\OS2_projekt\OS2_projekt\bin\Debug\ExpressSecurity.dll
