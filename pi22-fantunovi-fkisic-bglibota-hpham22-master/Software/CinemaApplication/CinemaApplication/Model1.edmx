@@ -1,0 +1,360 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="CinemaDatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Cinemas">
+          <Key>
+            <PropertyRef Name="Cinema_ID" />
+          </Key>
+          <Property Name="Cinema_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CinemaName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Adress" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PhoneNumber" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MovieHalls">
+          <Key>
+            <PropertyRef Name="MovieHall_ID" />
+          </Key>
+          <Property Name="MovieHall_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HallName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Capacity" Type="int" Nullable="false" />
+          <Property Name="ScreeningTime" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Cinema_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Movies">
+          <Key>
+            <PropertyRef Name="Movie_ID" />
+          </Key>
+          <Property Name="Movie_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MovieName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Director" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Genre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Duration" Type="int" Nullable="false" />
+          <Property Name="ReleaseDate" Type="date" Nullable="false" />
+          <Property Name="ShownUntil" Type="date" Nullable="false" />
+          <Property Name="NumberOfTickets" Type="int" />
+        </EntityType>
+        <EntityType Name="Reviews">
+          <Key>
+            <PropertyRef Name="Review_ID" />
+          </Key>
+          <Property Name="Review_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Rating" Type="int" Nullable="false" />
+          <Property Name="Feedback" Type="varchar" MaxLength="5000" Nullable="false" />
+          <Property Name="Movie_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SpecialDeals">
+          <Key>
+            <PropertyRef Name="SpecialDeals_ID" />
+          </Key>
+          <Property Name="SpecialDeals_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SpecialDeals_name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Discount" Type="int" Nullable="false" />
+          <Property Name="MovieHalls_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="User_ID" />
+          </Key>
+          <Property Name="User_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PhoneNumber" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_MovieHalls_Cinemas">
+          <End Role="Cinemas" Type="Self.Cinemas" Multiplicity="1" />
+          <End Role="MovieHalls" Type="Self.MovieHalls" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cinemas">
+              <PropertyRef Name="Cinema_ID" />
+            </Principal>
+            <Dependent Role="MovieHalls">
+              <PropertyRef Name="Cinema_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reviews_Movies">
+          <End Role="Movies" Type="Self.Movies" Multiplicity="1" />
+          <End Role="Reviews" Type="Self.Reviews" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Movies">
+              <PropertyRef Name="Movie_ID" />
+            </Principal>
+            <Dependent Role="Reviews">
+              <PropertyRef Name="Movie_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SpecialDeals_MovieHalls">
+          <End Role="MovieHalls" Type="Self.MovieHalls" Multiplicity="1" />
+          <End Role="SpecialDeals" Type="Self.SpecialDeals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MovieHalls">
+              <PropertyRef Name="MovieHall_ID" />
+            </Principal>
+            <Dependent Role="SpecialDeals">
+              <PropertyRef Name="MovieHalls_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CinemaDatabaseModelStoreContainer">
+          <EntitySet Name="Cinemas" EntityType="Self.Cinemas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MovieHalls" EntityType="Self.MovieHalls" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Movies" EntityType="Self.Movies" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reviews" EntityType="Self.Reviews" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SpecialDeals" EntityType="Self.SpecialDeals" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_MovieHalls_Cinemas" Association="Self.FK_MovieHalls_Cinemas">
+            <End Role="Cinemas" EntitySet="Cinemas" />
+            <End Role="MovieHalls" EntitySet="MovieHalls" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reviews_Movies" Association="Self.FK_Reviews_Movies">
+            <End Role="Movies" EntitySet="Movies" />
+            <End Role="Reviews" EntitySet="Reviews" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SpecialDeals_MovieHalls" Association="Self.FK_SpecialDeals_MovieHalls">
+            <End Role="MovieHalls" EntitySet="MovieHalls" />
+            <End Role="SpecialDeals" EntitySet="SpecialDeals" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CinemaDatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="CinemaDatabase" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Cinemas" EntityType="CinemaDatabaseModel.Cinema" />
+          <EntitySet Name="MovieHalls" EntityType="CinemaDatabaseModel.MovieHall" />
+          <EntitySet Name="Movies" EntityType="CinemaDatabaseModel.Movy" />
+          <EntitySet Name="SpecialDeals" EntityType="CinemaDatabaseModel.SpecialDeal" />
+          <EntitySet Name="Users" EntityType="CinemaDatabaseModel.User" />
+          <AssociationSet Name="FK_MovieHalls_Cinemas" Association="CinemaDatabaseModel.FK_MovieHalls_Cinemas">
+            <End Role="Cinema" EntitySet="Cinemas" />
+            <End Role="MovieHall" EntitySet="MovieHalls" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SpecialDeals_MovieHalls" Association="CinemaDatabaseModel.FK_SpecialDeals_MovieHalls">
+            <End Role="MovieHall" EntitySet="MovieHalls" />
+            <End Role="SpecialDeal" EntitySet="SpecialDeals" />
+          </AssociationSet>
+          <EntitySet Name="Reviews" EntityType="CinemaDatabaseModel.Review" />
+          <AssociationSet Name="FK_Reviews_Movies" Association="CinemaDatabaseModel.FK_Reviews_Movies">
+            <End Role="Movy" EntitySet="Movies" />
+            <End Role="Review" EntitySet="Reviews" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Cinema">
+          <Key>
+            <PropertyRef Name="Cinema_ID" />
+          </Key>
+          <Property Name="Cinema_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CinemaName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Adress" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PhoneNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="MovieHalls" Relationship="CinemaDatabaseModel.FK_MovieHalls_Cinemas" FromRole="Cinema" ToRole="MovieHall" />
+        </EntityType>
+        <EntityType Name="MovieHall">
+          <Key>
+            <PropertyRef Name="MovieHall_ID" />
+          </Key>
+          <Property Name="MovieHall_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HallName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Capacity" Type="Int32" Nullable="false" />
+          <Property Name="ScreeningTime" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Cinema_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Cinema" Relationship="CinemaDatabaseModel.FK_MovieHalls_Cinemas" FromRole="MovieHall" ToRole="Cinema" />
+          <NavigationProperty Name="SpecialDeals" Relationship="CinemaDatabaseModel.FK_SpecialDeals_MovieHalls" FromRole="MovieHall" ToRole="SpecialDeal" />
+        </EntityType>
+        <EntityType Name="Movy">
+          <Key>
+            <PropertyRef Name="Movie_ID" />
+          </Key>
+          <Property Name="Movie_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MovieName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Director" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Genre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Duration" Type="Int32" Nullable="false" />
+          <Property Name="ReleaseDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ShownUntil" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="NumberOfTickets" Type="Int32" />
+          <NavigationProperty Name="Reviews" Relationship="CinemaDatabaseModel.FK_Reviews_Movies" FromRole="Movy" ToRole="Review" />
+        </EntityType>
+        <EntityType Name="SpecialDeal">
+          <Key>
+            <PropertyRef Name="SpecialDeals_ID" />
+          </Key>
+          <Property Name="SpecialDeals_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SpecialDeals_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Discount" Type="Int32" Nullable="false" />
+          <Property Name="MovieHalls_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="MovieHall" Relationship="CinemaDatabaseModel.FK_SpecialDeals_MovieHalls" FromRole="SpecialDeal" ToRole="MovieHall" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="User_ID" />
+          </Key>
+          <Property Name="User_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PhoneNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_MovieHalls_Cinemas">
+          <End Type="CinemaDatabaseModel.Cinema" Role="Cinema" Multiplicity="1" />
+          <End Type="CinemaDatabaseModel.MovieHall" Role="MovieHall" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cinema">
+              <PropertyRef Name="Cinema_ID" />
+            </Principal>
+            <Dependent Role="MovieHall">
+              <PropertyRef Name="Cinema_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SpecialDeals_MovieHalls">
+          <End Type="CinemaDatabaseModel.MovieHall" Role="MovieHall" Multiplicity="1" />
+          <End Type="CinemaDatabaseModel.SpecialDeal" Role="SpecialDeal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MovieHall">
+              <PropertyRef Name="MovieHall_ID" />
+            </Principal>
+            <Dependent Role="SpecialDeal">
+              <PropertyRef Name="MovieHalls_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Review">
+          <Key>
+            <PropertyRef Name="Review_ID" />
+          </Key>
+          <Property Name="Review_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Rating" Type="Int32" Nullable="false" />
+          <Property Name="Feedback" Type="String" Nullable="false" MaxLength="5000" FixedLength="false" Unicode="false" />
+          <Property Name="Movie_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Movy" Relationship="CinemaDatabaseModel.FK_Reviews_Movies" FromRole="Review" ToRole="Movy" />
+        </EntityType>
+        <Association Name="FK_Reviews_Movies">
+          <End Type="CinemaDatabaseModel.Movy" Role="Movy" Multiplicity="1" />
+          <End Type="CinemaDatabaseModel.Review" Role="Review" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Movy">
+              <PropertyRef Name="Movie_ID" />
+            </Principal>
+            <Dependent Role="Review">
+              <PropertyRef Name="Movie_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CinemaDatabaseModelStoreContainer" CdmEntityContainer="CinemaDatabase">
+          <EntitySetMapping Name="Cinemas">
+            <EntityTypeMapping TypeName="CinemaDatabaseModel.Cinema">
+              <MappingFragment StoreEntitySet="Cinemas">
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Adress" ColumnName="Adress" />
+                <ScalarProperty Name="CinemaName" ColumnName="CinemaName" />
+                <ScalarProperty Name="Cinema_ID" ColumnName="Cinema_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MovieHalls">
+            <EntityTypeMapping TypeName="CinemaDatabaseModel.MovieHall">
+              <MappingFragment StoreEntitySet="MovieHalls">
+                <ScalarProperty Name="Cinema_ID" ColumnName="Cinema_ID" />
+                <ScalarProperty Name="ScreeningTime" ColumnName="ScreeningTime" />
+                <ScalarProperty Name="Capacity" ColumnName="Capacity" />
+                <ScalarProperty Name="HallName" ColumnName="HallName" />
+                <ScalarProperty Name="MovieHall_ID" ColumnName="MovieHall_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Movies">
+            <EntityTypeMapping TypeName="CinemaDatabaseModel.Movy">
+              <MappingFragment StoreEntitySet="Movies">
+                <ScalarProperty Name="NumberOfTickets" ColumnName="NumberOfTickets" />
+                <ScalarProperty Name="ShownUntil" ColumnName="ShownUntil" />
+                <ScalarProperty Name="ReleaseDate" ColumnName="ReleaseDate" />
+                <ScalarProperty Name="Duration" ColumnName="Duration" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Genre" ColumnName="Genre" />
+                <ScalarProperty Name="Director" ColumnName="Director" />
+                <ScalarProperty Name="MovieName" ColumnName="MovieName" />
+                <ScalarProperty Name="Movie_ID" ColumnName="Movie_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SpecialDeals">
+            <EntityTypeMapping TypeName="CinemaDatabaseModel.SpecialDeal">
+              <MappingFragment StoreEntitySet="SpecialDeals">
+                <ScalarProperty Name="MovieHalls_ID" ColumnName="MovieHalls_ID" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="SpecialDeals_name" ColumnName="SpecialDeals_name" />
+                <ScalarProperty Name="SpecialDeals_ID" ColumnName="SpecialDeals_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="CinemaDatabaseModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="User_ID" ColumnName="User_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reviews">
+            <EntityTypeMapping TypeName="CinemaDatabaseModel.Review">
+              <MappingFragment StoreEntitySet="Reviews">
+                <ScalarProperty Name="Movie_ID" ColumnName="Movie_ID" />
+                <ScalarProperty Name="Feedback" ColumnName="Feedback" />
+                <ScalarProperty Name="Rating" ColumnName="Rating" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Review_ID" ColumnName="Review_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
