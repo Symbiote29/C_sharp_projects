@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "hk7XTXB2P/QjppOoOyOh01aH9fGcDvclUBsjxRvoTt0eG1HzrQTQeEYR9pr7TdBttUtIEuQRfCOy++dIYtGDCw==",
+  "success": true,
+  "projectFilePath": "D:\\File Projects\\WeatherApp_MVC_C#\\WeatherApp\\WeatherApp.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Antunovici\\.nuget\\packages\\flurl\\4.0.0\\flurl.4.0.0.nupkg.sha512",
+    "C:\\Users\\Antunovici\\.nuget\\packages\\flurl.http\\4.0.2\\flurl.http.4.0.2.nupkg.sha512"
+  ],
+  "logs": []
+}

@@ -1,0 +1,96 @@
+﻿@{
+
+}
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f8ff;
+        color: #333;
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .weather-container {
+        text-align: center;
+        background-color: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        max-width: 500px;
+        width: 90%;
+    }
+
+    h1.display-4 {
+        font-size: 2.5rem;
+        color: #007BFF;
+        margin-bottom: 20px;
+    }
+
+    form {
+        margin-bottom: 20px;
+        flex-direction;
+    }
+
+    input[type="text"] {
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        width: 70%;
+        font-size: 1rem;
+        margin-right: 10px;
+    }
+
+    input[type="submit"] {
+        padding: 10px 20px;
+        background-color: #007BFF;
+        border: none;
+        border-radius: 5px;
+        color: #fff;
+        font-size: 1rem;
+        cursor: pointer;
+    }
+
+    input[type="submit"]:hover {
+        background-color: #0056b3;
+    }
+
+    h5 {
+        font-size: 1rem;
+        color: #333;
+        margin: 10px 0;
+    }
+
+    p {
+        color: #ff0000;
+    }
+</style>
+
+
+<div class="weather-container">
+    <h1 class="display-4">My Weather Application</h1>
+    <form asp-controller="Home" asp-action="GetCurrentWeatherDetails" method="post">
+        <div>
+            <input type="text" name="location" placeholder="Enter location" required />
+            <input type="hidden" name="viewName" value="CurrentWeatherDisplay" />
+            <input type="submit" value="Submit" />
+        </div>
+    </form>
+
+    @if (Model != null)
+    {
+                <h5>City: @Model.location.name</h5>
+                <h5>Country: @Model.location.region, @Model.location.country</h5>
+                <h5>Time: @Model.location.localtime</h5>
+                <h5>Temperature: @Model.current.temperature °C</h5>
+                <h5>Weather Description: @Model.current.weather_descriptions[0].ToString()</h5>
+    }
+    else if (ViewData.ContainsKey("IsFormSubmitted") && (bool)ViewData["IsFormSubmitted"])
+    {
+                <p>@ViewData["Message"]</p>
+    }
+</div>

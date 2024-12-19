@@ -1,0 +1,102 @@
+﻿@{
+
+}
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f8ff;
+        color: #333;
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .weather-container {
+        text-align: center;
+        background-color: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        max-width: 500px;
+        width: 90%;
+    }
+
+    h1.display-4 {
+        font-size: 2.5rem;
+        color: #007BFF;
+        margin-bottom: 20px;
+    }
+
+    form {
+        margin-bottom: 20px;
+        flex-direction;
+    }
+
+    input[type="text"] {
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        width: 70%;
+        font-size: 1rem;
+        margin-right: 10px;
+    }
+
+    input[type="submit"] {
+        padding: 10px 20px;
+        background-color: #007BFF;
+        border: none;
+        border-radius: 5px;
+        color: #fff;
+        font-size: 1rem;
+        cursor: pointer;
+    }
+
+    input[type="submit"]:hover {
+        background-color: #0056b3;
+    }
+
+    h5 {
+        font-size: 1rem;
+        color: #333;
+        margin: 10px 0;
+    }
+
+    p {
+        color: #ff0000; 
+    }
+</style>
+
+
+<div class="weather-container">
+    <h1 class="display-4">Historical Weather Display</h1>
+    <form asp-controller="Home" asp-action="GetHistoricalWeatherDetails" method="post">
+        <input type="text" name="location" placeholder="Enter location" required />
+        <input type="hidden" name="viewName" value="HistoricalWeatherDisplay" />
+         <label for="historical_date">Historical Date:</label>
+        <input type="date" id="historical_date" name="historicalDate" value="2023-10-15" required />
+        <label for="hourly">Hourly (0-24):</label>
+        <input type="number" id="hourly" name="hourly" min="0" max="24" value="1" required />
+        <input type="submit" value="Submit" />
+    </form>
+
+    @if (Model != null)
+    {
+                    <h5>City: @Model.location.name</h5>
+                    <h5>Country: @Model.location.region, @Model.location.country</h5>
+                    <h5>Time: @Model.location.localtime</h5>
+
+                    <h5>Historical Date: @Model.forecast.date</h5>
+                    <h5>Min temp: @Model.historical.mintemp</h5>
+                    <h5>Max temp: @Model.historical.maxtemp</h5>
+                    <h5>Avg temp: @Model.historical.avgtemp</h5>
+                    <h5>UV index: @Model.historical.uv_index</h5>
+    }
+    else if (ViewData.ContainsKey("IsFormSubmitted") && (bool)ViewData["IsFormSubmitted"])
+    {
+                    <p>@ViewData["Message"]</p>
+    }
+</div>

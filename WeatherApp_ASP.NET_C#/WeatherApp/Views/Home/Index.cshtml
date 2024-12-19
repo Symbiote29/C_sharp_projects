@@ -1,0 +1,36 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div id="content">
+    <div class="weather-container">
+        <h1 class="display-4">My Weather Application</h1>
+
+        <button id="loadCurrentWeather" style="cursor: pointer;">Current Weather</button>
+        <button id="loadHistoricalWeather" style="cursor: pointer;">Historical Weather</button>
+        <button id="loadForecastWeather" style="cursor: pointer;">Forecast Weather</button>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#loadCurrentWeather').click(function () {
+            $.get('@Url.Action("CurrentWeatherDisplayPartial", "Home")', function (data) {
+                $('#content').html(data);
+            });
+        });
+
+        $('#loadHistoricalWeather').click(function () {
+            $.get('@Url.Action("HistoricalWeatherDisplayPartial", "Home")', function (data) {
+                $('#content').html(data);
+            });
+        });
+
+        $('#loadForecastWeather').click(function () {
+            $.get('@Url.Action("ForecastWeatherDisplayPartial", "Home")', function (data) {
+                $('#content').html(data);
+            });
+        });
+    });
+</script>
